@@ -1,0 +1,42 @@
+---
+export interface Props {
+  project: {
+    name: string
+    description: string
+    url: {
+      github: string
+      website?: string
+    }
+  }
+}
+
+function getRandomColor() {
+  const letters = '0123456789ABCDEF'
+  let color = '#'
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)]
+  }
+  return color
+}
+
+const gradient = `linear-gradient(45deg, ${getRandomColor()}, ${getRandomColor()})`
+
+const { project } = Astro.props
+---
+
+<div class="p-[1px] bg-slate-900 rounded-xl" style={{ background: gradient }}>
+  <div class="bg-black m-[.5px] p-4 rounded-xl flex gap-3">
+    <div>
+      <img class="w-[42px]" src="/project/nodejs.png" alt="" />
+    </div>
+    <div>
+      <h1 class="text-xl font-semibold mb-3">{project.name}</h1>
+      <p class="text-slate-400 mb-3">{project.description}</p>
+
+      <div class="flex gap-5 text-sm">
+        <a href="">Github</a>
+        {project.url.website && <a href="">Live</a>}
+      </div>
+    </div>
+  </div>
+</div>
